@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import joblib # Tambahin di jejeran import paling atas
 from PIL import Image
 import time
 import pickle
@@ -8,18 +9,12 @@ import cv2
 import os
 import base64
 import json
-import joblib # Tambahin di jejeran import paling atas
 from skimage.feature import graycomatrix, graycoprops, local_binary_pattern, hog
 
 # ============================================================
 # 0. PATH DASAR PROYEK
 # ============================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# ============================================================
-# 1. LOAD MODEL MACHINE LEARNING
-# ============================================================
-import joblib # ⚠️ PENTING: Pindahkan baris ini ke jejeran import paling atas di app.py lu ya!
 
 # ============================================================
 # 1. LOAD MODEL MACHINE LEARNING
@@ -37,7 +32,7 @@ def load_ml_components():
         st.error(f"Gagal memuat file .pkl! Detail error: {e}")
         return None, None
 
-scaler, model_rf = load_ml_components()
+# scaler, model_rf = load_ml_components()
 
 # ============================================================
 # TUGAS LU SELANJUTNYA: GANTI ISI FUNGSI INI DENGAN KODE ASLI
@@ -268,6 +263,7 @@ html, body, [class*="css"] {
     box-shadow: 4px 0 24px rgba(0,0,0,0.05) !important;
     padding: 0 !important;
     width: 260px !important;
+    z-index: 999999 !important;
 }
 [data-testid="stSidebar"] > div:first-child,
 [data-testid="stSidebarContent"] {
@@ -687,7 +683,8 @@ nav_items = ""
 for i, item in enumerate(MENU_META):
     active_cls = " active" if i == _active_idx else ""
     nav_items += (
-        f'<a class="sb-nav-item{active_cls}" href="?page={item["slug"]}" target="_top">'
+        # ⚠️ UBAH target="_top" MENJADI target="_self" DI BARIS BAWAH INI
+        f'<a class="sb-nav-item{active_cls}" href="?page={item["slug"]}" target="_self">'
         f'<span class="sb-nav-icon">{item["icon"]}</span>'
         f'<span>{item["label"]}</span>'
         f'<span class="sb-nav-arrow">›</span>'
