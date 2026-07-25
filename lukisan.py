@@ -32,7 +32,8 @@ def load_ml_components():
         st.error(f"Gagal memuat file .pkl! Detail error: {e}")
         return None, None
 
-# scaler, model_rf = load_ml_components()
+# 👇 TAMBAHKAN BARIS INI TEPAT DI SINI BRE 👇
+scaler, model_rf = load_ml_components()
 
 # ============================================================
 # TUGAS LU SELANJUTNYA: GANTI ISI FUNGSI INI DENGAN KODE ASLI
